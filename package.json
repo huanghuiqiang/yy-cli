@@ -1,0 +1,26 @@
+{
+  "name": "test-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "bin": {
+    "yd": "bin/yd"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@darkobits/lolcatjs": "^3.1.5",
+    "commander": "^8.2.0",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.1.5",
+    "json2ts": "^0.0.7",
+    "ora": "^6.0.1",
+    "shelljs": "^0.8.4",
+    "user-home": "^3.0.0"
+  }
+}

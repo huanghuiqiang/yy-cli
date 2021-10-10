@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+const figlet = require('figlet');
+const Printer = require("@darkobits/lolcatjs");
+const txt = figlet.textSync("wan shi fu") + "\n" + "    达文西脚手架";
+const prograrm = require("commander");
+const inquirer = require('inquirer');
+const chalk = require('chalk');
+const json2ts = require("json2ts");
+// const ora  = require('ora');
+const userHone = require('userHone');
+const shell = require('shelljs');
+
+
+prograrm.version(Printer.fromString(txt), "-v,--version");
+prograrm.option("-i,--init", "🐶初始化项目");
+const bindHandler = {
+    init() {
+        inquirer
+            .prompt([
+                {
+                    type: 'type',
+                    message: '📃 请输入文件夹名称',
+                    name: 'dirname'
+                },
+                /* Pass your questions in here */
+                {
+                    name: "jskind",
+                    type: "list",
+                    message: "请使用该项目语言",
+                    choices: ["✔ES6", "✔TypeScript"]
+                }
+            ])
+            .then((answers) => {
+                // Use user feedback for... whatever!!
+                console.log(answers);
+                const __dirname = answers.__dirname
+                if (__dirname) {
+                    
+                }
+            })
+            .catch((error) => {
+                if (error.isTtyError) {
+                    // Prompt couldn't be rendered in the current environment
+                } else {
+                    // Something else went wrong
+                }
+            });
+    },
+    json2ts(jsonurl) {
+        // const spinner = ora('⏰ 正在帮大哥生成代码中，请稍后。。。');
+        // spinner.start();
+        const jsonContent = {
+            code: 1,
+            info: {
+                message: "请求成功",
+                data: [{
+                    num: 1,
+                    title: "3号仓库"
+                }]
+            }
+        }
+        let result = json2ts.convert(JSON.stringify(jsonContent));
+        console.log(result);
+    }
+};
+prograrm.usage("<cmd> [env]")
+    .arguments("<cmd> [env]")
+    .action(function (cmd, otherParams) {
+        const handler = bindHandler[cmd];
+        if (handler) {
+            handler();
+        } else {
+            // console.log("暂未实现" + cmd);
+            console.log(chalk.yellow("🙏 非常遗憾") + "【" + chalk.red(cmd) + "】" + chalk.yellow("暂未实现"));
+        }
+    });
+prograrm.parse(process.argv);
